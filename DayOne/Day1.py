@@ -1,5 +1,5 @@
 from collections import Counter
-filename = "sampleinput.txt"  
+filename = "DayOne/sampleinput.txt"  
 
 Liste1 = []
 Liste2 = []
