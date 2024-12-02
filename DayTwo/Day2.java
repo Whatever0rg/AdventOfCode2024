@@ -64,7 +64,7 @@ public class Day2 {
             boolean isDecreasing = true;
 
             List <Integer> tempList = new ArrayList<>(numbers);
-            //tempList.remove(i);
+            tempList.remove(i);                                                                         // Comment this out for Task One
 
             for (int n = 1; n < tempList.size(); n++) {
                 int difference = tempList.get(n) - tempList.get(n - 1);
