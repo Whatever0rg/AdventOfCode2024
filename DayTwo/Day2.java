@@ -5,7 +5,7 @@ public class Day2 {
 
     public static void main(String[] args) {
 
-        String filename = "DayTwo/input.txt";
+        String filename = "DayTwo/sampleinput.txt";
 
         readAndCheckNumbers(filename);
 
