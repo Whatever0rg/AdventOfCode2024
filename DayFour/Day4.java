@@ -9,7 +9,7 @@ public class Day4 {
     static int Len;
 
     public static void main(String[] args) {
-        String filename = "DayFour/input.txt";
+        String filename = "DayFour/sampleinput.txt";
 
         try (BufferedReader file = new BufferedReader(new FileReader(filename))) {
             String line;
