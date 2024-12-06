@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class Day6 {
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader("Day06/input.txt"));
+        BufferedReader br = new BufferedReader(new FileReader("Day06/sampleinput.txt"));
         String s;
         List<List<Character>> grid = new ArrayList<>();
         int startRow = -1;

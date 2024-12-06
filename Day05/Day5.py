@@ -4,7 +4,7 @@
 
 import re
 
-input_file = 'DayFive/message.txt'
+input_file = 'DayFive/sampleinput.txt'
 
 
 def extract_patterns(file_path):

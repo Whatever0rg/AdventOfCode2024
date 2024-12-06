@@ -2,7 +2,7 @@ import re
 
 pattern = r"mul\(\d{1,3},\d{1,3}\)|do(?:n't)?\(\)"
 
-input_file = 'DayThree/input.txt'
+input_file = 'DayThree/sampleinput.txt'
 
 def mul(x,y):
     return x * y
