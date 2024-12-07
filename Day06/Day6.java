@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class Day6 {
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader("Day06/sampleinput.txt"));
+        BufferedReader br = new BufferedReader(new FileReader("Day06/input.txt"));
         String s;
         List<List<Character>> grid = new ArrayList<>();
         int startRow = -1;
@@ -30,7 +30,6 @@ public class Day6 {
         }
 
         simulateGuardWalk(grid, startRow, startCol);
-
         int p1 = 0;
         List<Pos> potentialSites = new ArrayList<>();
         for (int i = 0; i < grid.size(); i++) {
@@ -74,7 +73,6 @@ public class Day6 {
     private static boolean simulateGuardWalk(List<List<Character>> grid, int startRow, int startCol) {
         int rows = grid.size();
         int cols = grid.getFirst().size();
-
         Direction dir = Direction.UP;
         int row = startRow;
         int col = startCol;
@@ -112,7 +110,7 @@ public class Day6 {
         RIGHT(0, 1),
         DOWN(1, 0),
         LEFT(0, -1);
-
+        
         final int r;
         final int c;
 
