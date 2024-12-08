@@ -14,7 +14,7 @@ def mush(num1 : int, num2 : int):
     result = int(str(num1) + str(num2))
     return result
 
-def extract_equations(input_file: str):
+def extract_equations(input_file : str):
     result = []
     with open(input_file, "r") as file:
         for line in file:
@@ -39,67 +39,38 @@ def extract_equations(input_file: str):
     
     return result
 
-def next_inline(current_result : int, remaining_elem : list, solution : int, mode : int):
-    if len(remaining_elem) == 1:
-        Sum = add(remaining_elem[0],current_result)
-        Product = mul(remaining_elem[0],current_result)
-        Mush = mush(remaining_elem[0],current_result)
-        if Sum == solution:
-            return True           
-        elif Product == solution:
-            return True
-        elif Mush == solution:
-            return True
-        else:
-            return False
+def next_inline(result : int, rest : list):
+    if len(rest) == 1:
+        return rest[0] == result
+
+    last = rest[-1]
+
+    if result % last == 0:
+        possible_mul = next_inline(result // last, rest[:-1])
     else:
-        if mode == 1:
-            current_result = mul(remaining_elem[0],current_result)
-        elif mode == 2:
-            current_result = add(remaining_elem[0],current_result)
-        elif mode == 3:
-            current_result = mush(current_result,remaining_elem[0])
-        if next_inline(current_result,remaining_elem[1:],solution,1) == False:
-            if next_inline(current_result,remaining_elem[1:],solution,2) == False:
-                return next_inline(current_result,remaining_elem[1:],solution, 3)
-            else: 
-                return True
-        else:
-            return True
-        
-def matching_solution(eq_list):
-    solution : int
-    is_right : bool
-    solution_list = []
-    
+        possible_mul = False
+    next_power_of_10 = 1
+    while next_power_of_10 <= last:
+        next_power_of_10 *= 10
+    if (result - last) % next_power_of_10 == 0:
+        possible_concat = next_inline((result - last) // next_power_of_10, rest[:-1])
+    else:
+        possible_concat = False
+
+    possible_add = next_inline(result - last, rest[:-1])
+    return possible_mul or possible_add or possible_concat
+
+
+def matching_solution(eq_list : list):
+    solution = 0  
     for eq_sublist in eq_list:
-        solution = eq_sublist[0]
-        
-        if len(eq_sublist[1:]) == 2:
-            Sum = add(eq_sublist[1],eq_sublist[2])
-            Product = mul(eq_sublist[1],eq_sublist[2])
-            Mush = mush(eq_sublist[1],eq_sublist[2])
-            if Sum == solution:
-                is_right = True
-            elif Product == solution:
-                is_right = True
-            elif Mush == solution:
-                is_right = True
-            else:
-                is_right = False
-        elif len(eq_sublist[1:]) == 1 and eq_sublist[1] == solution:
-            print('one element right')
-        else:
-            if next_inline(eq_sublist[1],eq_sublist[2:],solution,1) == False:
-                if(next_inline(eq_sublist[1],eq_sublist[2:],solution,2)) == False:
-                    is_right = next_inline(eq_sublist[1],eq_sublist[2:],solution,3)
-                else:
-                    is_right = True
-            else: 
-                is_right = True
-        if is_right == True:
-            solution_list.append(solution)
-        print(is_right,' | ',eq_sublist)
-    return sum(solution_list)
+        result = eq_sublist[0]
+        rest = eq_sublist[1:]
+        if  next_inline(result,rest):
+            solution += result
+            print('True | ',eq_sublist)
+        else: 
+            print('False | ',eq_sublist)
+    return solution
 
 print(matching_solution(extract_equations(input_file)))
